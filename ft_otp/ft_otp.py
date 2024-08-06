@@ -20,7 +20,7 @@ def parse_args():
 
 def save_key_and_counter(encrypted_key, counter):
     try:
-        with open('ft_otp.sec', 'wb') as f:
+        with open('/tmp/ft_otp.txt', 'wb') as f:
             f.write(encrypted_key + b'\n' + str(counter).encode())
     except Exception as e:
         print(f'Error saving key and counter: {e}')
@@ -29,7 +29,7 @@ def save_key_and_counter(encrypted_key, counter):
 
 def read_key_and_counter():
     try:
-        with open('ft_otp.sec', 'rb') as f:
+        with open('/tmp/ft_otp.txt', 'rb') as f:
             content = f.read().split(b'\n')
             encrypted_key = content[0]
             counter = int(content[1].decode())
