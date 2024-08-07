@@ -16,12 +16,6 @@ def parse_args():
         description='Program to add Exif data to images.')
     parser.add_argument('images', nargs='+',
                         help='Images to add Exif data to.')
-    group = parser.add_argument_group('Exif modification')
-    group.add_argument('-k', '--key', type=str, help='Exif key to modify.')
-    group.add_argument('-v', '--value', type=str,
-                       help='Value for the Exif key.')
-
-    group.required = True
     return parser.parse_args()
 
 
@@ -35,10 +29,8 @@ def parse_args():
 #         exifread.write_exif(w, tags)
 
 
-def ExifImage(image, key, value):
+def ExifImage(image):
     print(f'\n{RED}Exif data for image: {image}{RESET}\n')
-    # if value is not None and key is not None:
-    #     ChangeExif(image, key, value)
     f = open(image, 'rb')
     tags = exifread.process_file(f)
     if tags is None:
@@ -54,7 +46,7 @@ def ExifImage(image, key, value):
 def main():
     args = parse_args()
     for i in range(len(args.images)):
-        ExifImage(args.images[i], args.key, args.value)
+        ExifImage(args.images[i])
 
 
 if __name__ == '__main__':
