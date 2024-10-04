@@ -32,14 +32,15 @@ def handle_saving_image(url, folder):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        image_type = response.headers['Content-Type'].split('/')[1]
-        file_name = os.path.join(folder, f'image_{index}.{image_type}')
-        with open(file_name, 'wb') as file:
-            file.write(response.content)
-        print(f'Image {index} saved as {file_name}')
-        index += 1
+        if 'Content-Type' in response.headers:
+            image_type = response.headers['Content-Type'].split('/')[1]
+            file_name = os.path.join(folder, f'image_{index}.{image_type}')
+            with open(file_name, 'wb') as file:
+                file.write(response.content)
+            print(f'Image {index} saved as {file_name}')
+            index += 1
     except Exception as e:
-        print(f'Error saving image {url}: {e}')
+        pass
 
 
 def getDepth(url):
@@ -53,7 +54,6 @@ def getDepth(url):
 
 def get_images_url(url, folder, depth):
     global visited
-    print(f'\nProcess depthing URL at depth {depth}: {url}\n')
     if depth == 0:
         exit()
     visited.add(url)
@@ -61,11 +61,10 @@ def get_images_url(url, folder, depth):
         response = requests.get(url, headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
-        if response.headers['Content-Type'].startswith('image/'):
+        if 'Content-Type' in response.headers and response.headers['Content-Type'].startswith('image/'):
             handle_saving_image(url, folder)
             return
         soup = BeautifulSoup(response.content, 'html.parser')
-        print(f"Images URL: {len(soup.find_all('img'))}")
         for img_tag in soup.find_all('img'):
             img_url = img_tag.get('src')
             if img_url:
@@ -79,8 +78,8 @@ def get_images_url(url, folder, depth):
                 get_images_url(next_url, folder, depth - 1)
 
     except requests.exceptions.RequestException as e:
-        print(f'Error getting images from {url}')
         return
+
 
 def main():
     global index
@@ -89,7 +88,6 @@ def main():
 
     if not os.path.exists(args.path):
         os.makedirs(args.path)
-
     get_images_url(args.url, args.path, args.limit)
 
 
