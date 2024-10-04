@@ -20,7 +20,6 @@ def parse_args():
                         help='Images to parse for EXIF and metadata.')
     return parser.parse_args()
 
-# Check if file exists and get its metadata like creation date
 def get_file_metadata(image_path):
     if not os.path.isfile(image_path):
         return f"{RED}File not found: {image_path}{RESET}"
@@ -30,7 +29,6 @@ def get_file_metadata(image_path):
     metadata['File Size (KB)'] = os.path.getsize(image_path) // 1024
     return metadata
 
-# Function to check image format compatibility (e.g., JPEG, PNG, etc.)
 def check_image_format(image):
     try:
         img = Image.open(image)
@@ -39,16 +37,12 @@ def check_image_format(image):
     except Exception as e:
         return None
 
-# Extract EXIF data from the image (only for compatible formats like JPEG, TIFF)
 def get_exif_data(image):
     try:
         with open(image, 'rb') as f:
             tags = exifread.process_file(f)
-
         if not tags:
             return f"{RED}No EXIF data found for image: {image}{RESET}"
-
-        # Create a PrettyTable for EXIF data
         table = PrettyTable()
         table.field_names = [f"{GREEN}Tag{RESET}", f"{GREEN}Value{RESET}"]
 
@@ -67,13 +61,11 @@ def process_image(image):
     
     print(f"\n{YELLOW}Processing image: {image}{RESET}\n")
     
-    # Get and print basic metadata (creation date, file size)
     metadata = get_file_metadata(image)
     print(f"{GREEN}Basic File Metadata:{RESET}")
     for key, value in metadata.items():
         print(f"{CYAN}{key}: {YELLOW}{value}{RESET}")
     
-    # Only try to get EXIF data if format is JPEG or TIFF
     if image_format in ["JPEG", "TIFF"]:
         print(f"\n{GREEN}EXIF Data:{RESET}")
         exif_data = get_exif_data(image)

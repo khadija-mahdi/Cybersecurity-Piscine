@@ -1,0 +1,9 @@
+Pillow==9.3.0         # For Image and ExifTags (part of the PIL module)
+exifread==2.3.2       # For reading EXIF metadata
+prettytable==3.7.0    # For creating tables in the terminal
+requests==2.31.0      # For making HTTP requests
+beautifulsoup4==4.12.0 # For web scraping with BeautifulSoup
+cryptography==41.0.0  # For encryption and decryption using Fernet
+
+
+#  pip install -r requirements.txt

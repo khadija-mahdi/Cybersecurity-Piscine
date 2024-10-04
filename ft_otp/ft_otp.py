@@ -69,17 +69,19 @@ def ft_hotp(key):
         with open(key, 'rb') as key_file:
             decrypted_key = fernet.decrypt(key_file.read()).decode()
         if decrypted_key:
-            hmac_sha1 = hmac.new(bytes.fromhex(decrypted_key), counter.to_bytes(8, byteorder='big'), hashlib.sha1)
+            hmac_sha1 = hmac.new(bytes.fromhex(decrypted_key), counter.to_bytes(
+                8, byteorder='big'), hashlib.sha1)
             hmac_result = hmac_sha1.digest()
             offset = hmac_result[-1] & 0x0F
             binary_code = hmac_result[offset:offset + 4]
-            binary_code_int = int.from_bytes(binary_code, byteorder='big') & 0x7FFFFFFF
+            binary_code_int = int.from_bytes(
+                binary_code, byteorder='big') & 0x7FFFFFFF
             otp = binary_code_int % 1000000
             print(otp)
             counter += 1
             save_key_and_counter(fer, counter)
     except Exception as e:
-        print(f'please generate a key first')
+        print(f'please generate a key first: {e}')
         return
 
 
