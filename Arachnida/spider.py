@@ -85,10 +85,12 @@ def main():
     global index
     index = 0
     args = parse_args()
-
-    if not os.path.exists(args.path):
-        os.makedirs(args.path)
-    get_images_url(args.url, args.path, args.limit)
+    try:
+        if not os.path.exists(args.path):
+            os.makedirs(args.path)
+        get_images_url(args.url, args.path, args.limit)
+    except Exception as e:
+        print(f'Error: {e}')
 
 
 if __name__ == '__main__':
