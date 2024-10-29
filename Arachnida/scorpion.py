@@ -5,14 +5,12 @@ import piexif
 import os
 from datetime import datetime
 
-# ANSI color codes for formatting
 CYAN = '\033[96m'
 YELLOW = '\033[93m'
 RESET = '\033[0m'
 GREEN = '\033[92m'
 RED = '\033[91m'
 
-# Supported file extensions (assumed from Spider)
 SUPPORTED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.bmp'}
 
 def parse_args():
@@ -51,19 +49,16 @@ def display_exif_data(exif_data):
 
 def display_metadata(file_path):
     try:
-        # Open image and extract basic attributes
         with Image.open(file_path) as img:
             print(f"\n{YELLOW}Metadata for {file_path}:{RESET}")
             print(f"  {CYAN}- Format:{RESET} {img.format}")
             print(f"  {CYAN}- Dimensions:{RESET} {img.size[0]}x{img.size[1]} pixels")
             print(f"  {CYAN}- Mode:{RESET} {img.mode}")
 
-            # File system metadata
             file_metadata = get_file_metadata(file_path)
             for key, value in file_metadata.items():
                 print(f"  {CYAN}- {key}:{RESET} {value}")
             
-            # Retrieve and display all EXIF data
             exif_data = img._getexif()
             display_exif_data(exif_data)
     except Exception as e:

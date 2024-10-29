@@ -34,11 +34,12 @@ def handle_saving_image(url, folder):
         response.raise_for_status()
         if 'Content-Type' in response.headers:
             image_type = response.headers['Content-Type'].split('/')[1]
-            file_name = os.path.join(folder, f'image_{index}.{image_type}')
-            with open(file_name, 'wb') as file:
-                file.write(response.content)
-            print(f'Image {index} saved as {file_name}')
-            index += 1
+            if(image_type == 'jpeg' or image_type == 'jpg' or image_type == 'png' or image_type == 'gif' or image_type == 'bmp' ):
+                file_name = os.path.join(folder, f'image_{index}.{image_type}')
+                with open(file_name, 'wb') as file:
+                    file.write(response.content)
+                print(f'Image {index} saved as {file_name}')
+                index += 1
     except Exception as e:
         pass
 
