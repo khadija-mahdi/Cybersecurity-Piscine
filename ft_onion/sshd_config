@@ -1,5 +1,18 @@
-# tor-webserver/sshd_config
+Include /etc/ssh/sshd_config.d/*.conf
+
 Port 4242
-PermitRootLogin yes
-PasswordAuthentication yes
+PermitRootLogin no
+MaxAuthTries 3
+AuthorizedKeysFile    .ssh/authorized_keys .ssh/authorized_keys2
+
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
 UsePAM yes
+X11Forwarding yes
+PrintMotd no
+ClientAliveInterval 180
+AcceptEnv LANG LC_*
+Subsystem    sftp    /usr/lib/openssh/sftp-server
+Protocol 2
+AllowUsers aaitouna
