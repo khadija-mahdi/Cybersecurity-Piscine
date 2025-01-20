@@ -5,7 +5,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"
-      - "3001:4242"
+    volumes:
+      - ~/.ssh/id_rsa_ssh.pub:/home/kmahdi/.ssh/authorized_keys
     networks:
       - tor-network
     restart: unless-stopped
