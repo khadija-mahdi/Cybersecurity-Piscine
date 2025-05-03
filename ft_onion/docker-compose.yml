@@ -3,13 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    volumes:
-      - ~/.ssh/id_rsa_ssh.pub:/home/kmahdi/.ssh/authorized_keys
     networks:
       - tor-network
     restart: unless-stopped
+    volumes:
+      - ~/.ssh/id_rsa.pub:/home/kmahdi/.ssh/authorized_keys
 
 networks:
   tor-network:

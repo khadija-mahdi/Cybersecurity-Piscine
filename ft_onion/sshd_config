@@ -1,3 +1,12 @@
 Port 4242
-Include /etc/ssh/sshd_config.d/*.conf
-PasswordAuthentication yes
+PermitRootLogin no
+MaxAuthTries 3
+AuthorizedKeysFile    .ssh/authorized_keys .ssh/authorized_keys2
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+PrintMotd no
+ClientAliveInterval 180
+Protocol 2
+AllowUsers kmahdi

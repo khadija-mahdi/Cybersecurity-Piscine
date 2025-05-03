@@ -9,8 +9,6 @@ RUN useradd -m kmahdi && \
     chmod 700 /home/kmahdi/.ssh && \
     chown -R kmahdi:kmahdi /home/kmahdi/.ssh
 
-
-
 COPY nginx.conf /etc/nginx/sites-available/default
 COPY sshd_config /etc/ssh/sshd_config
 COPY torrc /etc/tor/torrc

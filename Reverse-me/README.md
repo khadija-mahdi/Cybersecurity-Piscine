@@ -21,8 +21,6 @@ This project is designed to introduce you to the art of **Reverse Engineering**.
    - Explain the patching method and provide documentation justifying your changes.
    - No function overrides or cheating with `LD_PRELOAD` or similar tricks.
 
-3. **Submission**
-   - Submit your work through a Git repository. Only the content in your repository will be evaluated.
 
 ---
 

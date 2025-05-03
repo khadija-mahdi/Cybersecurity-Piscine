@@ -1,0 +1,6 @@
+{
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc-12",
+    "files.associations": {
+        "string.h": "c"
+    }
+}
