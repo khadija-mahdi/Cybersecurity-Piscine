@@ -1,0 +1,25 @@
+services:
+  attacker:
+    build: ./Attacker
+    container_name: Attacker
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    networks:
+      - testnet
+
+  ftp_client:
+    build: ./FTP_Client
+    container_name: FTP_Client
+    networks:
+      - testnet
+
+  ftp_server:
+    build: ./FTP_Server
+    container_name: FTP_Server
+    networks:
+      - testnet
+
+networks:
+  testnet:
+    driver: bridge

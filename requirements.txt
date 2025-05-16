@@ -5,3 +5,4 @@ requests==2.31.0      # For making HTTP requests
 beautifulsoup4==4.12.0 # For web scraping with BeautifulSoup
 cryptography==41.0.0  # For encryption and decryption using Fernet
 beautifulsoup4==4.12.0
+scapy
