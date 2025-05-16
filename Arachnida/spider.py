@@ -81,13 +81,8 @@ def get_images_url(url, folder, depth):
     except requests.exceptions.RequestException as e:
         return
 
-
-def main():
-    global index
-    index = 0
-    args = parse_args()
-    try:
-        if not os.path.exists(args.path):
+if __name__ == '__main__':
+    main() not os.path.exists(args.path):
             os.makedirs(args.path)
         get_images_url(args.url, args.path, args.limit)
     except Exception as e:
